@@ -1,8 +1,6 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
-import { collection, addDoc } from 'firebase/firestore';
 import { ArrowLeft, CheckCircle } from 'lucide-react';
-import { db } from '../firebase/config';
 import { DietFormData, WorkoutFormData } from '../types';
 import QRDisplay from './QRDisplay';
 
@@ -39,14 +37,22 @@ const Purchase: React.FC<PurchaseProps> = ({ type, formData, onBack }) => {
 
     setIsSubmitting(true);
     try {
-      await addDoc(collection(db, 'orders'), {
+      // Store order in localStorage for now (can be replaced with actual database later)
+      const order = {
         type,
         planType: formData.planType,
         price,
         userData: formData,
-        timestamp: new Date(),
-        status: 'pending'
-      });
+        timestamp: new Date().toISOString(),
+        status: 'pending',
+        orderId: Date.now().toString()
+      };
+      
+      const existingOrders = JSON.parse(localStorage.getItem('orders') || '[]');
+      existingOrders.push(order);
+      localStorage.setItem('orders', JSON.stringify(existingOrders));
+      
+      console.log('Order saved:', order);
       setShowPayment(true);
     } catch (error) {
       console.error('Error submitting order:', error);
