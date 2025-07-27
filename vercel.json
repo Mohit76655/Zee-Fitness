@@ -1,7 +1,8 @@
 {
+  "version": 2,
   "functions": {
     "server/index.ts": {
-      "runtime": "nodejs18.x"
+      "runtime": "@vercel/node@latest"
     }
   },
   "rewrites": [
