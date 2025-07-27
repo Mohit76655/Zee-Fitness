@@ -35,6 +35,9 @@ export const dietFormSchema = userSchema.extend({
   wakeupTime: z.string().min(1, 'Wake-up time is required'),
   sleepTime: z.string().min(1, 'Sleep time is required'),
   budget: z.number().optional(),
+  agreeToTerms: z.boolean().refine((val) => val === true, {
+    message: "You must agree to the terms and conditions",
+  }),
 });
 
 export const workoutFormSchema = userSchema.extend({

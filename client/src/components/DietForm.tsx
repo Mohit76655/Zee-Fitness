@@ -41,6 +41,7 @@ const DietForm: React.FC<DietFormProps> = ({ planId, onBack, onSubmit }) => {
       },
       preworkoutMeals: false,
       postworkoutMeals: false,
+      agreeToTerms: false,
     }
   });
 
@@ -385,7 +386,7 @@ const DietForm: React.FC<DietFormProps> = ({ planId, onBack, onSubmit }) => {
               </div>
             </div>
 
-            {supplementsUsed === true && (
+            {supplementsUsed && (
               <div className="grid md:grid-cols-3 gap-4">
                 {['Whey Protein', 'Creatine', 'BCAA', 'Pre-workout', 'Mass Gainer', 'Other'].map((supplement) => (
                   <label key={supplement} className="flex items-center space-x-3 text-white cursor-pointer">
@@ -400,6 +401,21 @@ const DietForm: React.FC<DietFormProps> = ({ planId, onBack, onSubmit }) => {
                 ))}
               </div>
             )}
+          </div>
+
+          {/* Terms and Conditions */}
+          <div className="mb-6">
+            <label className="flex items-start space-x-3 text-white cursor-pointer">
+              <input
+                {...register('agreeToTerms')}
+                type="checkbox"
+                className="w-5 h-5 text-orange-500 bg-gray-700 border-gray-600 rounded focus:ring-orange-500 mt-1"
+              />
+              <span className="text-sm">
+                I agree to the <a href="#" className="text-orange-400 hover:text-orange-300 underline">Terms and Conditions</a> and <a href="#" className="text-orange-400 hover:text-orange-300 underline">Privacy Policy</a>
+              </span>
+            </label>
+            {errors.agreeToTerms && <p className="text-red-400 text-sm mt-1">{errors.agreeToTerms.message}</p>}
           </div>
 
           <motion.button

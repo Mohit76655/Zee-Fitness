@@ -29,6 +29,7 @@ export interface DietFormData extends User {
   wakeupTime: string;
   sleepTime: string;
   budget?: number;
+  agreeToTerms: boolean;
 }
 
 export interface WorkoutFormData extends User {
