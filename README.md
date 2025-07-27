@@ -10,6 +10,19 @@ A comprehensive nutrition and fitness application that allows users to create pe
 - **Firebase Integration**: Real-time data storage with localStorage fallback
 - **Responsive Design**: Modern UI with Tailwind CSS and Framer Motion animations
 
+## Deployment on Vercel
+
+This application is configured for deployment on Vercel with the following structure:
+- Frontend built with Vite and served from `client/dist`
+- Backend API as serverless functions in the `api/` directory
+- Automatic builds and deployments on git push
+
+### Deploy Steps:
+1. Connect your GitHub repository to Vercel
+2. Vercel will automatically detect the configuration from `vercel.json`
+3. The build command `npm run build` will compile the frontend
+4. API routes will be automatically deployed as serverless functions
+
 ## Tech Stack
 
 ### Frontend
