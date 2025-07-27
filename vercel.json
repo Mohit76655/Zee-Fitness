@@ -1,21 +1,8 @@
 {
-  "_comment": "Updated build configuration to fix vite deployment issue",
-  "functions": {
-    "api/index.ts": {
-      "runtime": "nodejs20.x"
-    }
-  },
   "rewrites": [
     {
       "source": "/api/(.*)",
       "destination": "/api/index.ts"
-    },
-    {
-      "source": "/(.*)",
-      "destination": "/client/dist/index.html"
     }
-  ],
-  "installCommand": "npm install",
-  "buildCommand": "npm run build",
-  "outputDirectory": "client/dist"
+  ]
 }
