@@ -1,13 +1,17 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
+import Navbar from './components/Navbar';
 import HomePage from './components/HomePage';
+import About from './components/About';
+import Contact from './components/Contact';
+import Profile from './components/Profile';
 import PlanSelection from './components/PlanSelection';
 import DietForm from './components/DietForm';
 import WorkoutForm from './components/WorkoutForm';
 import Purchase from './components/Purchase';
 import { DietFormData, WorkoutFormData } from './types';
 
-type Step = 'home' | 'plans' | 'form' | 'purchase';
+type Step = 'home' | 'plans' | 'form' | 'purchase' | 'about' | 'contact' | 'profile';
 
 function App() {
   const [currentStep, setCurrentStep] = useState<Step>('home');
@@ -59,8 +63,18 @@ function App() {
     duration: 0.5
   };
 
+  const handleNavStepChange = (step: string) => {
+    if (step === 'plans') {
+      // Reset to home first, then user can select diet/workout
+      setCurrentStep('home');
+    } else if (['home', 'about', 'contact', 'profile'].includes(step)) {
+      setCurrentStep(step as Step);
+    }
+  };
+
   return (
-    <div className="min-h-screen">
+    <div className="min-h-screen bg-gray-50">
+      <Navbar currentStep={currentStep} onStepChange={handleNavStepChange} />
       <AnimatePresence mode="wait">
         {currentStep === 'home' && (
           <motion.div
@@ -72,6 +86,45 @@ function App() {
             transition={pageTransition}
           >
             <HomePage onSelection={handleTypeSelection} />
+          </motion.div>
+        )}
+
+        {currentStep === 'about' && (
+          <motion.div
+            key="about"
+            initial="initial"
+            animate="in"
+            exit="out"
+            variants={pageVariants}
+            transition={pageTransition}
+          >
+            <About />
+          </motion.div>
+        )}
+
+        {currentStep === 'contact' && (
+          <motion.div
+            key="contact"
+            initial="initial"
+            animate="in"
+            exit="out"
+            variants={pageVariants}
+            transition={pageTransition}
+          >
+            <Contact />
+          </motion.div>
+        )}
+
+        {currentStep === 'profile' && (
+          <motion.div
+            key="profile"
+            initial="initial"
+            animate="in"
+            exit="out"
+            variants={pageVariants}
+            transition={pageTransition}
+          >
+            <Profile />
           </motion.div>
         )}
 
