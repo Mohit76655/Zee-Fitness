@@ -55,6 +55,7 @@ const DietForm: React.FC<DietFormProps> = ({ planId, onBack, onSubmit }) => {
   };
 
   const onFormSubmit = (data: DietFormData) => {
+    console.log('Form submitted with data:', data);
     onSubmit(data);
   };
 
@@ -420,8 +421,15 @@ const DietForm: React.FC<DietFormProps> = ({ planId, onBack, onSubmit }) => {
           </div>
 
           <motion.button
-            type="submit"
+            type="button"
             disabled={!agreeToTerms}
+            onClick={() => {
+              if (agreeToTerms) {
+                const formValues = watch();
+                console.log('Button clicked, form values:', formValues);
+                onSubmit(formValues as DietFormData);
+              }
+            }}
             whileHover={{ scale: agreeToTerms ? 1.02 : 1 }}
             whileTap={{ scale: agreeToTerms ? 0.98 : 1 }}
             className={`w-full py-4 rounded-xl font-bold text-lg transition-all duration-300 ${
