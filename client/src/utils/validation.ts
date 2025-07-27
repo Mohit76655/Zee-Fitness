@@ -23,7 +23,9 @@ export const dietFormSchema = userSchema.extend({
   wheyPreference: z.enum(['with', 'without']),
   goals: goalSchema,
   dietPreferences: z.string().min(10, 'Please provide more details about your diet preferences'),
-  mealsPerDay: z.enum([3, 4, 5, 6]),
+  mealsPerDay: z.number().refine((val) => [3, 4, 5, 6].includes(val), {
+    message: "Meals per day must be 3, 4, 5, or 6",
+  }),
   preworkoutMeals: z.boolean(),
   postworkoutMeals: z.boolean(),
   supplements: z.object({
