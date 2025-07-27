@@ -46,12 +46,7 @@ const DietForm: React.FC<DietFormProps> = ({ planId, onBack, onSubmit }) => {
   });
 
   const supplementsUsed = watch('supplements.used');
-  
-  // Debug form state
-  const watchedValues = watch();
-  console.log('Form state:', watchedValues);
-  console.log('Form errors:', errors);
-  console.log('Form isValid:', isValid);
+  const agreeToTerms = watch('agreeToTerms');
 
   const handleWheySelection = (preference: 'with' | 'without') => {
     setWheyPreference(preference);
@@ -426,11 +421,11 @@ const DietForm: React.FC<DietFormProps> = ({ planId, onBack, onSubmit }) => {
 
           <motion.button
             type="submit"
-            disabled={!isValid}
-            whileHover={{ scale: isValid ? 1.02 : 1 }}
-            whileTap={{ scale: isValid ? 0.98 : 1 }}
+            disabled={!agreeToTerms}
+            whileHover={{ scale: agreeToTerms ? 1.02 : 1 }}
+            whileTap={{ scale: agreeToTerms ? 0.98 : 1 }}
             className={`w-full py-4 rounded-xl font-bold text-lg transition-all duration-300 ${
-              isValid
+              agreeToTerms
                 ? 'bg-gradient-to-r from-orange-500 to-red-500 text-white hover:shadow-lg hover:shadow-orange-500/25'
                 : 'bg-gray-600 text-gray-400 cursor-not-allowed'
             }`}
