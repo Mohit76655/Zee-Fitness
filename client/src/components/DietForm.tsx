@@ -46,6 +46,12 @@ const DietForm: React.FC<DietFormProps> = ({ planId, onBack, onSubmit }) => {
   });
 
   const supplementsUsed = watch('supplements.used');
+  
+  // Debug form state
+  const watchedValues = watch();
+  console.log('Form state:', watchedValues);
+  console.log('Form errors:', errors);
+  console.log('Form isValid:', isValid);
 
   const handleWheySelection = (preference: 'with' | 'without') => {
     setWheyPreference(preference);
@@ -386,7 +392,7 @@ const DietForm: React.FC<DietFormProps> = ({ planId, onBack, onSubmit }) => {
               </div>
             </div>
 
-            {supplementsUsed && (
+            {supplementsUsed === true && (
               <div className="grid md:grid-cols-3 gap-4">
                 {['Whey Protein', 'Creatine', 'BCAA', 'Pre-workout', 'Mass Gainer', 'Other'].map((supplement) => (
                   <label key={supplement} className="flex items-center space-x-3 text-white cursor-pointer">
