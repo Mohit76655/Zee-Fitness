@@ -1,20 +1,20 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Menu, X, Dumbbell, Home, Info, Phone, User } from 'lucide-react';
+import { Menu, X, Dumbbell, Home, Utensils, Activity } from 'lucide-react';
 
 interface NavbarProps {
   currentStep?: string;
   onStepChange?: (step: string) => void;
+  onPlanSelect?: (type: 'diet' | 'workout') => void;
 }
 
-const Navbar: React.FC<NavbarProps> = ({ currentStep = 'home', onStepChange }) => {
+const Navbar: React.FC<NavbarProps> = ({ currentStep = 'home', onStepChange, onPlanSelect }) => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   const navItems = [
     { id: 'home', label: 'Home', icon: Home },
-    { id: 'about', label: 'About', icon: Info },
-    { id: 'contact', label: 'Contact', icon: Phone },
-    { id: 'profile', label: 'Profile', icon: User },
+    { id: 'diet', label: 'Diet Plans', icon: Utensils, isPlan: true },
+    { id: 'workout', label: 'Workout Plans', icon: Activity, isPlan: true },
   ];
 
   const toggleMobileMenu = () => {
@@ -22,14 +22,18 @@ const Navbar: React.FC<NavbarProps> = ({ currentStep = 'home', onStepChange }) =
   };
 
   const handleNavClick = (itemId: string) => {
-    if (onStepChange) {
+    if (itemId === 'diet' || itemId === 'workout') {
+      if (onPlanSelect) {
+        onPlanSelect(itemId as 'diet' | 'workout');
+      }
+    } else if (onStepChange) {
       onStepChange(itemId);
     }
     setIsMobileMenuOpen(false);
   };
 
   return (
-    <nav className="bg-white shadow-lg border-b border-gray-100 sticky top-0 z-50">
+    <nav className="bg-gray-900 shadow-2xl border-b border-gray-700 sticky top-0 z-50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-16">
           {/* Logo */}
@@ -38,14 +42,14 @@ const Navbar: React.FC<NavbarProps> = ({ currentStep = 'home', onStepChange }) =
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
           >
-            <div className="bg-gradient-to-br from-blue-600 to-purple-600 p-2 rounded-lg">
+            <div className="bg-gradient-to-br from-blue-500 to-purple-500 p-2 rounded-lg">
               <Dumbbell className="h-6 w-6 text-white" />
             </div>
             <div className="flex flex-col">
-              <span className="text-xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
+              <span className="text-xl font-bold bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent">
                 Zee Fitness
               </span>
-              <span className="text-xs text-gray-500 -mt-1">Transform Your Life</span>
+              <span className="text-xs text-gray-400 -mt-1">Transform Your Life</span>
             </div>
           </motion.div>
 
@@ -54,7 +58,8 @@ const Navbar: React.FC<NavbarProps> = ({ currentStep = 'home', onStepChange }) =
             <div className="flex items-center space-x-8">
               {navItems.map((item) => {
                 const Icon = item.icon;
-                const isActive = currentStep === item.id;
+                const isActive = currentStep === item.id || 
+                  (item.isPlan && currentStep === 'plans');
                 
                 return (
                   <motion.button
@@ -62,8 +67,8 @@ const Navbar: React.FC<NavbarProps> = ({ currentStep = 'home', onStepChange }) =
                     onClick={() => handleNavClick(item.id)}
                     className={`flex items-center space-x-1 px-3 py-2 rounded-lg text-sm font-medium transition-all duration-200 ${
                       isActive
-                        ? 'bg-gradient-to-r from-blue-600 to-purple-600 text-white shadow-lg'
-                        : 'text-gray-700 hover:text-blue-600 hover:bg-blue-50'
+                        ? 'bg-gradient-to-r from-blue-500 to-purple-500 text-white shadow-lg'
+                        : 'text-gray-300 hover:text-blue-400 hover:bg-gray-800'
                     }`}
                     whileHover={{ scale: 1.05 }}
                     whileTap={{ scale: 0.95 }}
@@ -79,8 +84,8 @@ const Navbar: React.FC<NavbarProps> = ({ currentStep = 'home', onStepChange }) =
           {/* Get Started Button */}
           <div className="hidden md:block">
             <motion.button
-              onClick={() => handleNavClick('plans')}
-              className="bg-gradient-to-r from-blue-600 to-purple-600 text-white px-6 py-2 rounded-lg font-medium shadow-lg hover:shadow-xl transition-all duration-200"
+              onClick={() => handleNavClick('home')}
+              className="bg-gradient-to-r from-blue-500 to-purple-500 text-white px-6 py-2 rounded-lg font-medium shadow-lg hover:shadow-xl transition-all duration-200"
               whileHover={{ scale: 1.05, y: -1 }}
               whileTap={{ scale: 0.95 }}
             >
@@ -92,7 +97,7 @@ const Navbar: React.FC<NavbarProps> = ({ currentStep = 'home', onStepChange }) =
           <div className="md:hidden">
             <motion.button
               onClick={toggleMobileMenu}
-              className="inline-flex items-center justify-center p-2 rounded-lg text-gray-700 hover:text-blue-600 hover:bg-blue-50 transition-colors duration-200"
+              className="inline-flex items-center justify-center p-2 rounded-lg text-gray-300 hover:text-blue-400 hover:bg-gray-800 transition-colors duration-200"
               whileTap={{ scale: 0.95 }}
             >
               {isMobileMenuOpen ? (
@@ -113,12 +118,13 @@ const Navbar: React.FC<NavbarProps> = ({ currentStep = 'home', onStepChange }) =
             animate={{ opacity: 1, height: 'auto' }}
             exit={{ opacity: 0, height: 0 }}
             transition={{ duration: 0.2 }}
-            className="md:hidden bg-white border-t border-gray-100"
+            className="md:hidden bg-gray-900 border-t border-gray-700"
           >
             <div className="px-4 py-4 space-y-3">
               {navItems.map((item) => {
                 const Icon = item.icon;
-                const isActive = currentStep === item.id;
+                const isActive = currentStep === item.id || 
+                  (item.isPlan && currentStep === 'plans');
                 
                 return (
                   <motion.button
@@ -126,8 +132,8 @@ const Navbar: React.FC<NavbarProps> = ({ currentStep = 'home', onStepChange }) =
                     onClick={() => handleNavClick(item.id)}
                     className={`w-full flex items-center space-x-3 px-4 py-3 rounded-lg text-left font-medium transition-all duration-200 ${
                       isActive
-                        ? 'bg-gradient-to-r from-blue-600 to-purple-600 text-white shadow-lg'
-                        : 'text-gray-700 hover:text-blue-600 hover:bg-blue-50'
+                        ? 'bg-gradient-to-r from-blue-500 to-purple-500 text-white shadow-lg'
+                        : 'text-gray-300 hover:text-blue-400 hover:bg-gray-800'
                     }`}
                     whileHover={{ x: 4 }}
                     whileTap={{ scale: 0.98 }}
@@ -140,8 +146,8 @@ const Navbar: React.FC<NavbarProps> = ({ currentStep = 'home', onStepChange }) =
               
               {/* Mobile Get Started Button */}
               <motion.button
-                onClick={() => handleNavClick('plans')}
-                className="w-full bg-gradient-to-r from-blue-600 to-purple-600 text-white px-4 py-3 rounded-lg font-medium shadow-lg mt-4"
+                onClick={() => handleNavClick('home')}
+                className="w-full bg-gradient-to-r from-blue-500 to-purple-500 text-white px-4 py-3 rounded-lg font-medium shadow-lg mt-4"
                 whileHover={{ scale: 1.02 }}
                 whileTap={{ scale: 0.98 }}
               >
