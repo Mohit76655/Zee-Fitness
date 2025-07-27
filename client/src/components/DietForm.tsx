@@ -301,7 +301,9 @@ const DietForm: React.FC<DietFormProps> = ({ planId, onBack, onSubmit }) => {
                 <div className="flex space-x-4">
                   <label className="flex items-center space-x-2 text-white cursor-pointer">
                     <input
-                      {...register('preworkoutMeals')}
+                      {...register('preworkoutMeals', { 
+                        setValueAs: (value) => value === 'true' 
+                      })}
                       type="radio"
                       value="true"
                       className="w-4 h-4 text-orange-500 bg-gray-700 border-gray-600 focus:ring-orange-500"
@@ -310,7 +312,9 @@ const DietForm: React.FC<DietFormProps> = ({ planId, onBack, onSubmit }) => {
                   </label>
                   <label className="flex items-center space-x-2 text-white cursor-pointer">
                     <input
-                      {...register('preworkoutMeals')}
+                      {...register('preworkoutMeals', { 
+                        setValueAs: (value) => value === 'true' 
+                      })}
                       type="radio"
                       value="false"
                       className="w-4 h-4 text-orange-500 bg-gray-700 border-gray-600 focus:ring-orange-500"
@@ -325,7 +329,9 @@ const DietForm: React.FC<DietFormProps> = ({ planId, onBack, onSubmit }) => {
                 <div className="flex space-x-4">
                   <label className="flex items-center space-x-2 text-white cursor-pointer">
                     <input
-                      {...register('postworkoutMeals')}
+                      {...register('postworkoutMeals', { 
+                        setValueAs: (value) => value === 'true' 
+                      })}
                       type="radio"
                       value="true"
                       className="w-4 h-4 text-orange-500 bg-gray-700 border-gray-600 focus:ring-orange-500"
@@ -334,7 +340,9 @@ const DietForm: React.FC<DietFormProps> = ({ planId, onBack, onSubmit }) => {
                   </label>
                   <label className="flex items-center space-x-2 text-white cursor-pointer">
                     <input
-                      {...register('postworkoutMeals')}
+                      {...register('postworkoutMeals', { 
+                        setValueAs: (value) => value === 'true' 
+                      })}
                       type="radio"
                       value="false"
                       className="w-4 h-4 text-orange-500 bg-gray-700 border-gray-600 focus:ring-orange-500"
@@ -354,7 +362,9 @@ const DietForm: React.FC<DietFormProps> = ({ planId, onBack, onSubmit }) => {
               <div className="flex space-x-4">
                 <label className="flex items-center space-x-2 text-white cursor-pointer">
                   <input
-                    {...register('supplements.used')}
+                    {...register('supplements.used', { 
+                      setValueAs: (value) => value === 'true' 
+                    })}
                     type="radio"
                     value="true"
                     className="w-4 h-4 text-orange-500 bg-gray-700 border-gray-600 focus:ring-orange-500"
@@ -363,7 +373,9 @@ const DietForm: React.FC<DietFormProps> = ({ planId, onBack, onSubmit }) => {
                 </label>
                 <label className="flex items-center space-x-2 text-white cursor-pointer">
                   <input
-                    {...register('supplements.used')}
+                    {...register('supplements.used', { 
+                      setValueAs: (value) => value === 'true' 
+                    })}
                     type="radio"
                     value="false"
                     className="w-4 h-4 text-orange-500 bg-gray-700 border-gray-600 focus:ring-orange-500"
@@ -373,7 +385,7 @@ const DietForm: React.FC<DietFormProps> = ({ planId, onBack, onSubmit }) => {
               </div>
             </div>
 
-            {supplementsUsed && (
+            {supplementsUsed === true && (
               <div className="grid md:grid-cols-3 gap-4">
                 {['Whey Protein', 'Creatine', 'BCAA', 'Pre-workout', 'Mass Gainer', 'Other'].map((supplement) => (
                   <label key={supplement} className="flex items-center space-x-3 text-white cursor-pointer">
