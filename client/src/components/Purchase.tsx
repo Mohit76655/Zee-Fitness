@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
+import { collection, addDoc } from 'firebase/firestore';
 import { ArrowLeft, CheckCircle } from 'lucide-react';
+import { db } from '../firebase/config';
 import { DietFormData, WorkoutFormData } from '../types';
 import QRDisplay from './QRDisplay';
 
@@ -37,22 +39,27 @@ const Purchase: React.FC<PurchaseProps> = ({ type, formData, onBack }) => {
 
     setIsSubmitting(true);
     try {
-      // Store order in localStorage for now (can be replaced with actual database later)
       const order = {
         type,
         planType: formData.planType,
         price,
         userData: formData,
-        timestamp: new Date().toISOString(),
-        status: 'pending',
-        orderId: Date.now().toString()
+        timestamp: new Date(),
+        status: 'pending'
       };
+
+      // Try Firebase first, fallback to localStorage
+      try {
+        await addDoc(collection(db, 'orders'), order);
+        console.log('Order saved to Firebase:', order);
+      } catch (firebaseError) {
+        console.warn('Firebase unavailable, saving to localStorage:', firebaseError);
+        const localOrder = { ...order, orderId: Date.now().toString(), timestamp: order.timestamp.toISOString() };
+        const existingOrders = JSON.parse(localStorage.getItem('orders') || '[]');
+        existingOrders.push(localOrder);
+        localStorage.setItem('orders', JSON.stringify(existingOrders));
+      }
       
-      const existingOrders = JSON.parse(localStorage.getItem('orders') || '[]');
-      existingOrders.push(order);
-      localStorage.setItem('orders', JSON.stringify(existingOrders));
-      
-      console.log('Order saved:', order);
       setShowPayment(true);
     } catch (error) {
       console.error('Error submitting order:', error);
