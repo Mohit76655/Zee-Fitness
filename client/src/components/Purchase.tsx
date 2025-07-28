@@ -70,9 +70,9 @@ const Purchase: React.FC<PurchaseProps> = ({ type, formData, onBack }) => {
   };
 
   const upiId = 'mohit76655-1@oksbi'; // Replace with actual UPI ID
-  const phoneNumber = '+917014370425'; // Replace with actual phone number
+  //const phoneNumber = '+917014370425'; // Replace with actual phone number
   const upiLink = `upi://pay?pa=${upiId}&pn=Gym Trainer&am=${price}&cu=INR`;
-  const telegramLink = `https://t.me/+${phoneNumber.replace('+', '')}`;
+  const telegramLink = `https://t.me/Zee_Fitnes`;
 
   if (showPayment) {
     return (
