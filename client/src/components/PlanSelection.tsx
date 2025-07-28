@@ -14,28 +14,28 @@ const PlanSelection: React.FC<PlanSelectionProps> = ({ type, onPlanSelect, onBac
     {
       id: 'veg',
       name: 'Veg Diet Plan',
-      price: 999,
+      price: 1999,
       image: 'https://images.pexels.com/photos/1640777/pexels-photo-1640777.jpeg?auto=compress&cs=tinysrgb&w=500',
       description: 'Plant-based nutrition for optimal health'
     },
     {
       id: 'non-veg',
       name: 'Non-Veg Diet Plan',
-      price: 1299,
+      price: 1999,
       image: 'https://images.pexels.com/photos/361184/asparagus-steak-veal-steak-veal-361184.jpeg?auto=compress&cs=tinysrgb&w=500',
       description: 'Protein-rich meals with lean meats'
     },
     {
       id: 'vegan',
       name: 'Vegan Plan',
-      price: 1199,
+      price: 1999,
       image: 'https://images.pexels.com/photos/1059905/pexels-photo-1059905.jpeg?auto=compress&cs=tinysrgb&w=500',
       description: 'Complete plant-based nutrition'
     },
     {
       id: 'custom',
       name: 'Custom Plan',
-      price: 1999,
+      price: 3999,
       image: 'https://images.pexels.com/photos/1332313/pexels-photo-1332313.jpeg?auto=compress&cs=tinysrgb&w=500',
       description: 'Fully personalized meal planning'
     }
@@ -45,28 +45,28 @@ const PlanSelection: React.FC<PlanSelectionProps> = ({ type, onPlanSelect, onBac
     {
       id: 'push-pull-legs',
       name: 'Push Pull Legs',
-      price: 1499,
+      price: 1999,
       image: 'https://images.pexels.com/photos/1552242/pexels-photo-1552242.jpeg?auto=compress&cs=tinysrgb&w=500',
       description: 'Efficient 6-day split routine'
     },
     {
       id: 'bro-split',
       name: 'Bro Split',
-      price: 1299,
+      price: 1999,
       image: 'https://images.pexels.com/photos/1431282/pexels-photo-1431282.jpeg?auto=compress&cs=tinysrgb&w=500',
       description: 'Traditional bodybuilding approach'
     },
     {
       id: 'full-body',
       name: 'Full Body',
-      price: 999,
+      price: 1999,
       image: 'https://images.pexels.com/photos/2827392/pexels-photo-2827392.jpeg?auto=compress&cs=tinysrgb&w=500',
       description: 'Complete workout in every session'
     },
     {
       id: 'custom',
       name: 'Custom Plan',
-      price: 2499,
+      price: 3999,
       image: 'https://images.pexels.com/photos/3253501/pexels-photo-3253501.jpeg?auto=compress&cs=tinysrgb&w=500',
       description: 'Tailored specifically for you'
     }
