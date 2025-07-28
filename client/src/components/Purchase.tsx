@@ -254,7 +254,8 @@ const Purchase: React.FC<PurchaseProps> = ({ type, formData, onBack }) => {
                 <p>• Plans will be delivered within 24-48 hours after payment verification</p>
                 <p>• All plans are customized based on the information you provided</p>
                 <p>• Plans are for personal use only and cannot be shared or resold</p>
-                <p>• Refunds are available within 7 days if you're not satisfied</p>
+                <p>• Refunds are not available</p>
+                <p>• we are not certified trainer or nutritionist</p>
                 <p>• By purchasing, you agree to follow the plan as recommended</p>
               </div>
             </div>
