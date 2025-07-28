@@ -19,16 +19,16 @@ const Purchase: React.FC<PurchaseProps> = ({ type, formData, onBack }) => {
 
   const planPrices = {
     diet: {
-      veg: 999,
-      'non-veg': 1299,
-      vegan: 1199,
-      custom: 1999,
+      veg: 1999,
+      'non-veg': 1999,
+      vegan: 1999,
+      custom: 3999,
     },
     workout: {
-      'push-pull-legs': 1499,
-      'bro-split': 1299,
-      'full-body': 999,
-      custom: 2499,
+      'push-pull-legs': 1999,
+      'bro-split': 1999,
+      'full-body': 1999,
+      custom: 3999,
     }
   };
 
